@@ -21,5 +21,5 @@ SerenadeFilter.prototype.targetExtension = 'js'
 
 SerenadeFilter.prototype.processString = function(string) {
   var ast = JSON.stringify(this.Serenade.template(string).ast);
-  return "module.exports = require('Serenade').template(" + ast + ")";
+  return "module.exports = require('serenade').template(" + ast + ")";
 }
