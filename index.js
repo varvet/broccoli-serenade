@@ -1,5 +1,6 @@
 var path = require("path");
-var Filter = require('broccoli-filter')
+var Filter = require("broccoli-filter")
+var Serenade = require("serenade")
 
 module.exports = SerenadeFilter
 SerenadeFilter.prototype = Object.create(Filter.prototype)
@@ -12,14 +13,13 @@ function SerenadeFilter (inputTree, options) {
 
   this.options = options || {}
 
-  this.Serenade = require(this.options.serenadePath || "./serenade.0.5.0.min.js").Serenade
+  this.Serenade = this.options.Serenade || Serenade;
 }
 
 SerenadeFilter.prototype.extensions = ['serenade']
 SerenadeFilter.prototype.targetExtension = 'js'
 
-SerenadeFilter.prototype.processString = function(string, name) {
-  var name = JSON.stringify(name.replace(/\.serenade$/, "").replace(/views\//, ""));
-  var ast = JSON.stringify(this.Serenade.view(string).parse());
-  return "Serenade.view(" + name + ", " + ast + ")";
+SerenadeFilter.prototype.processString = function(string) {
+  var ast = JSON.stringify(this.Serenade.template(string).ast);
+  return "module.exports = require('Serenade').template(" + ast + ")";
 }

@@ -12,6 +12,7 @@
   "author": "Kim Burgestrand and Jonas Nicklas",
   "license": "MIT",
   "dependencies": {
-    "broccoli-filter": "^0.1.6"
+    "broccoli-filter": "^0.1.6",
+    "serenade": "git://github.com/elabs/serenade.js.git#v2"
   }
 }
